@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RestaurantRaterAPI.Models;
 
 namespace RestaurantRaterAPI.Controllers
@@ -29,7 +30,19 @@ namespace RestaurantRaterAPI.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok("Successfully Added!");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetRatings()
+        {
+            var ratings = await _context.Ratings.Select(r=> new RatingListItem
+            {
+                Id = r.Id,
+                RestaurantId = r.RestaurantId
+            }).ToListAsync();
+
+            return Ok(ratings);
         }
     }
 }

@@ -84,7 +84,7 @@ namespace RestaurantRaterAPI.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return Ok();
+            return Ok("Successfully Updated!");
         }
 
         [HttpDelete("{id:int}")]
@@ -100,7 +100,7 @@ namespace RestaurantRaterAPI.Controllers
 
             _context.Restaurants.Remove(restaurant);
             await _context.SaveChangesAsync();
-            return Ok();
+            return Ok("Successfully Deleted!");
         }
     }
 }
